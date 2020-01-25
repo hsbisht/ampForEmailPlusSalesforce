@@ -18,7 +18,7 @@ router.post('/', (req, res, next) => {
     res.setHeader('Access-Control-Expose-Headers', 'AMP-Access-Control-Allow-Source-Origin');
 
     res.status(200).json({
-        response : req.body.rating
+        rating : req.body.rating
     })
 });
 
