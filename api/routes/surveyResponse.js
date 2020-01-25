@@ -12,7 +12,6 @@ router.post('/', (req, res, next) => {
     res.setHeader('Content-type', 'application/json');
     res.setHeader('Access-Control-Allow-Credentials', true);
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Expose-Headers', 'AMP-Access-Control-Allow-Source-Origin');
     res.status(200).json({
         message : 'Handling post request to /surveyResponse.'
     })
