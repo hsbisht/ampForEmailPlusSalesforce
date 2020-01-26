@@ -1,4 +1,5 @@
 const express = require('express');
+const jsforce   = require('jsforce');
 
 const router = express.Router();
 
@@ -16,10 +17,31 @@ router.post('/', (req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'https://amp.gmail.dev');
     res.setHeader('AMP-Access-Control-Allow-Source-Origin', 'amp@gmail.dev');
     res.setHeader('Access-Control-Expose-Headers', 'AMP-Access-Control-Allow-Source-Origin');
+    
 
-    res.status(200).json({
-        rating : req.body.rating
-    })
+        var conn = new jsforce.Connection({
+          loginUrl : 'https://ap1.stmpb.stm.salesforce.com'
+        });
+
+        var username = 'hsinghbisht@sf.com';
+        var password = 'test1234igS0FiOmk1gTU5KyTntpRVw4';
+        conn.login(username, password, function(err, userInfo) {
+          if (err) { return console.error(err); }
+          console.log(conn.accessToken);
+          console.log(conn.instanceUrl);
+          console.log("User ID: " + userInfo.id);
+          console.log("Org ID: " + userInfo.organizationId);
+
+          var body = { invitationId: req.body.invitationId, npsResponse : req.body.npsResponse, textResponse : req.body.textResponse  };
+            conn.apex.post("/api/survey", body, function(err, respon) {
+            if (err) { 
+                return console.error(err); 
+            }
+            console.log("response: ", respon);
+            
+            res.send(respon);
+        });
+    });
 });
 
 router.get('/:surveyResponseId', (req, res, next) => {
