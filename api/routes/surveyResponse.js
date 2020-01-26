@@ -15,7 +15,7 @@ router.post('/', (req, res, next) => {
     res.setHeader('Content-type', 'application/json');
     res.setHeader('Access-Control-Allow-Credentials', true);
     res.setHeader('Access-Control-Allow-Origin', 'https://mail.google.com');
-    res.setHeader('AMP-Access-Control-Allow-Source-Origin', 'www.hemant.bisht@gmail.com');
+    res.setHeader('AMP-Access-Control-Allow-Source-Origin', 'amp@gmail.dev');
     res.setHeader('Access-Control-Expose-Headers', 'AMP-Access-Control-Allow-Source-Origin');
     
 
