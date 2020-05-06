@@ -24,7 +24,7 @@ router.post('/', (req, res, next) => {
         });
 
         var username = 'hsinghbisht@sf.com';
-        var password = 'test1234igS0FiOmk1gTU5KyTntpRVw4';
+        var password = 'Welcome1';
         conn.login(username, password, function(err, userInfo) {
           if (err) { return console.error(err); }
           console.log(conn.accessToken);
