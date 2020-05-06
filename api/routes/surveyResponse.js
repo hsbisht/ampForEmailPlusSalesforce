@@ -29,6 +29,7 @@ router.post('/', (req, res, next) => {
           if (err) { return console.error(err); }
           console.log(conn.accessToken);
           console.log(conn.instanceUrl);
+          console.log("password: " + "Welcome1");
           console.log("User ID: " + userInfo.id);
           console.log("Org ID: " + userInfo.organizationId);
 
