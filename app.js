@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-const surveyResponseRoutes = require('./api/routes/surveyResponse');
+const surveyResponseRoutes = require('./api/routes/feedbackResponse');
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({
@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-app.use('/surveyResponse', surveyResponseRoutes);
+app.use('/feedbackResponse', surveyResponseRoutes);
 
 
 app.use((req, res, next) =>{

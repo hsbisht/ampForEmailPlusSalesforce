@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get('/', (req, res, next) => {
     res.status(200).json({
-        message : 'Handling get request to /surveyResponse.'
+        message : 'Handling get request to /feedbackResponse.'
     })
 });
 
@@ -17,7 +17,6 @@ router.post('/', (req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'https://mail.google.com');
     res.setHeader('AMP-Access-Control-Allow-Source-Origin', 'amp@gmail.dev');
     res.setHeader('Access-Control-Expose-Headers', 'AMP-Access-Control-Allow-Source-Origin');
-    
 
         var conn = new jsforce.Connection({
           loginUrl : 'https://ap1.stmpb.stm.salesforce.com'
@@ -33,13 +32,12 @@ router.post('/', (req, res, next) => {
           console.log("User ID: " + userInfo.id);
           console.log("Org ID: " + userInfo.organizationId);
 
-          var body = { invitationId: req.body.invitationId, npsResponse : req.body.npsResponse, textResponse : req.body.textResponse  };
-            conn.apex.post("/api/survey", body, function(err, respon) {
+          var body = { npsResponse : req.body.npsResponse, textResponse : req.body.textResponse  };
+            conn.apex.post("/api/feedback", body, function(err, respon) {
             if (err) { 
                 return console.error(err); 
             }
             console.log("response: ", respon);
-            
             res.send(respon);
         });
     });
@@ -48,7 +46,7 @@ router.post('/', (req, res, next) => {
 router.get('/:surveyResponseId', (req, res, next) => {
     const id = req.params.productId;
     if(id === 'special') {
-        res.status(200).json({
+        res.status(200).json({ 
             message : 'Special Id is for you.',
             id : id
         })
