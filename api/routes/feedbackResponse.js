@@ -10,7 +10,11 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-
+    
+    res.setHeader('Content-type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', 'https://mail.google.com');
+    res.setHeader('AMP-Access-Control-Allow-Source-Origin', 'amp@gmail.dev');
+    res.setHeader('Access-Control-Expose-Headers', 'AMP-Access-Control-Allow-Source-Origin');
 
         var conn = new jsforce.Connection({
           loginUrl : 'https://ap1.stmpb.stm.salesforce.com'
@@ -27,7 +31,7 @@ router.post('/', (req, res, next) => {
                         npsResponse : req.body.npsResponse, 
                         textResponse : req.body.textResponse  
                     };
-
+                    
         conn.apex.post("/api/feedback", body, function(err, respon) {
             if (err) { 
                 return console.error(err); 
